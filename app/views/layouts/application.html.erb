@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    Menu: 
+    <%= link_to 'Clients', clients_path %> | 
+    <%= link_to 'Invoices', invoices_path %> | 
+    <%= link_to 'Coupons', coupons_path %> | 
+    <%= link_to 'Products', products_path %>
     <%= yield %>
   </body>
 </html>
