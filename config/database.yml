@@ -5,20 +5,14 @@ default: &default
 
 development:
   <<: *default
-  host: db
-  database: sgc_development
-  username: postgres
-  password: postgres
+  database: auth_development
 
 test:
   <<: *default
-  host: db
-  database: sgc_test
-  username: postgres
-  password: postgres
+  database: auth_test
 
 production:
   <<: *default
-  database: sgc_production
-  username: sgc
-  password: <%= ENV['SGC_DATABASE_PASSWORD'] %>
+  database: auth_production
+  username: auth
+  password: <%= ENV['AUTH_DATABASE_PASSWORD'] %>
