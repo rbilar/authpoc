@@ -13,3 +13,13 @@ Invoice.create([{ client: clients.first, product: products.first, discount: coup
                 { client: clients.second, product: products.second, discount: coupon.second.discount },
                 { client: clients.third, product: products.third, discount: coupon.third.discount },
                 { client: clients.last, product: products.last, discount: coupon.last.discount }])
+
+roles = Role.create([{ name: 'Admin' }, { name: 'Manager' }, { name: 'Seller' }, { name: 'Client' }])
+
+users = User.create([{ email: 'admin@rdstation.com', password: 'admin', password_confirmation: 'admin' },
+                     { email: 'manager@rdstation.com', password: 'manager', password_confirmation: 'manager' },
+                     { email: 'seller@rdstation.com', password: 'seller', password_confirmation: 'seller' },
+                     { email: 'client@rdstation.com', password: 'client', password_confirmation: 'client' }])
+
+UserRole.create([{ user: users.first, role: roles.first }, { user: users.second, role: roles.second },
+                 { user: users.third, role: roles.third }, { user: users.last, role: roles.last }])
