@@ -10,11 +10,15 @@
   </head>
 
   <body>
-    Menu: 
-    <%= link_to 'Clients', clients_path %> | 
-    <%= link_to 'Invoices', invoices_path %> | 
-    <%= link_to 'Coupons', coupons_path %> | 
-    <%= link_to 'Products', products_path %>
+    <% if user_signed_in? %>
+      Menu: 
+      <%= link_to 'Index', root_path %> | 
+      <%= link_to 'Clients', clients_path %> | 
+      <%= link_to 'Invoices', invoices_path %> | 
+      <%= link_to 'Coupons', coupons_path %> | 
+      <%= link_to 'Products', products_path %> | 
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

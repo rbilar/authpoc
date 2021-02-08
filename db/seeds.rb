@@ -16,10 +16,12 @@ Invoice.create([{ client: clients.first, product: products.first, discount: coup
 
 roles = Role.create([{ name: 'Admin' }, { name: 'Manager' }, { name: 'Seller' }, { name: 'Client' }])
 
-users = User.create([{ email: 'admin@rdstation.com', password: 'teste123', password_confirmation: 'teste123' },
-                     { email: 'manager@rdstation.com', password: 'teste123', password_confirmation: 'teste123' },
-                     { email: 'seller@rdstation.com', password: 'teste123', password_confirmation: 'teste123' },
-                     { email: 'client@rdstation.com', password: 'teste123', password_confirmation: 'teste123' }])
+RolePermission.create([{ role: roles.first, permission: 'all.client.all' },
+                       { role: roles.first, permission: 'all.coupon.all.read' },
+                       { role: roles.first, permission: 'all.user' }])
 
-UserRole.create([{ user: users.first, role: roles.first }, { user: users.second, role: roles.second },
-                 { user: users.third, role: roles.third }, { user: users.last, role: roles.last }])
+User.create([{ email: 'admin@rdstation.com', password: 'teste123', password_confirmation: 'teste123', roles: [roles.first] },
+             { email: 'manager@rdstation.com', password: 'teste123', password_confirmation: 'teste123', roles: [roles.second] },
+             { email: 'seller@rdstation.com', password: 'teste123', password_confirmation: 'teste123', roles: [roles.third] },
+             { email: 'client@rdstation.com', password: 'teste123', password_confirmation: 'teste123', roles: [roles.last] }])
+

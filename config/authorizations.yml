@@ -1,0 +1,14 @@
+all:
+  client: &client
+    all: [read, create, update, delete]
+    owner: [read, create, update, delete]
+  coupon:
+    all: [read, create, update, delete]
+  invoice:
+    all: [read, create, update, delete]
+    owner: [read, create, update, delete]
+  product: 
+    all: [read, create, update, delete]
+  user:
+    all: [read, create, update, delete]
+    owner: [read, create, update, delete]

@@ -1,0 +1,29 @@
+<% if signed_in? %>
+  <h3>Wellcome <i><%= current_user.email %></i></h3>
+  <p><b>Your roles:</b></p>
+  <ul>
+    <% current_user.roles.each do |role| %>
+      <li><%= role.name %></li>
+    <% end %>
+  </ul>
+  <p><b>Your authorizations:</b></p>
+  <%= HashToHTML(@my_authorizations).html_safe %>
+  
+  <p>
+    <%= "#{ permission_humanize(can? :manage, Client) } - manage Client" %>
+  </p>
+  <p>
+    <%= "#{ permission_humanize(can? :manage, Invoice) } - manage Invoice" %>
+  </p>
+  <p>
+    <%= "#{ permission_humanize(can? :read, Coupon) } - read Coupon" %>
+  </p>
+  <p>
+    <%= "#{ permission_humanize(can? :manage, Coupon) } - manage Coupon" %>
+  </p>
+  <p>
+    <%= "#{ permission_humanize(can? :manage, User) } - manage User" %>
+  </p>
+<% else %>
+  Please, <%= link_to 'Login', new_user_session_path %>
+<% end %>
