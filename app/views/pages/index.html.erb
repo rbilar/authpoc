@@ -6,21 +6,21 @@
       <li><%= role.name %></li>
     <% end %>
   </ul>
-  <p><b>Your authorizations:</b></p>
-  <%= HashToHTML(@authorizations).html_safe %>
-
-  <p><b>[NOVA] Your authorizations:</b></p>
-  <%= AutorizationsToHTML(@authorizations['all'], @my_authorizations).html_safe %>
-
   <p>
-    AURIZAÇÔES: <%= @my_authorizations %>
+    AUTORIZAÇÕES: <%= @my_authorizations %>
   </p>
+
+  <p><b>Your authorizations:</b></p>
+  <%= AutorizationsToHTML(@authorizations['all'], @my_authorizations).html_safe %>
 
   <p>
     <%= "#{ permission_humanize(can? :manage, Client) } - manage Client" %>
   </p>
   <p>
     <%= "#{ permission_humanize(can? :manage, Invoice) } - manage Invoice" %>
+  </p>
+  <p>
+    <%= "#{ permission_humanize(can? :disable, Invoice ) } - disable Invoice" %>
   </p>
   <p>
     <%= "#{ permission_humanize(can? :read, Coupon) } - read Coupon" %>

@@ -6,47 +6,47 @@ module ApplicationHelper
 
     out = '<ul>'
     authorizations.each do |key, value|
-      puts 'passou'
-      out += (li % ["#{level}.#{key}", 'achado']) + key
+      out += (li % ["#{level}.#{key}", permission_class("#{level}.#{key}", permissions)]) + key
 
       if value.is_a?(Hash)
         out += AutorizationsToHTML(value, permissions, "#{level}.#{key}")
       elsif value.is_a?(Array)
-        out += '<ul>'
+        out += '<ul><li>'
         value.each do |v|
-          out += (li % ["#{level}.#{key}.#{v}", 'achado']) + v + '</li>'
+          out += "<span id='#{level}.#{key}.#{v}' class='#{permission_class("#{level}.#{key}.#{v}", permissions)}'>#{v}</span> | "
         end
-        out += '</ul>'
+        out += '</ul></li>'
       else
-        out += (li % ["#{level}.#{key}.#{value}", 'achado']) + value + '</li>'
+        out += (li % ["#{level}.#{key}.#{value}", permission_class("#{level}.#{key}.#{value}", permissions)]) + value + '</li>'
       end
     end
 
     out += "</li></ul>"
   end
 
-  def HashToHTML(hash, opts = {})
-    return if !hash.is_a?(Hash)
+  def permission_class(autorization, permissions)
+    return 'with_permission' if permission_path?(autorization, permissions)
 
-    indent_level = opts.fetch(:indent_level) { 0 }
+    'without_permission'
+  end
 
-    out = " " * indent_level + "<ul>\n"
+  def permission_path?(autorization, permissions)
+    puts "- - - - - - - - - - - - "
 
-    hash.each do |key, value|
-      out += " " * (indent_level + 2) + "<li><strong>#{key}:</strong>"
-
-      if value.is_a?(Hash)
-        out += "\n" + HashToHTML(value, :indent_level => indent_level + 2) + " " * (indent_level + 2)
-      elsif value.is_a?(Array)
-        value.each do |v|
-          out += " - #{v}"
+    permissions.each do |permission|
+      auth = ''
+      autorization.split('.').each_with_index do |a, i|
+        if (i.positive?)
+          auth += '.' + a
+          puts permission + " | " + auth
+          return true if auth.start_with? permission
+        else
+          auth += a
         end
-      else
-        out += " <span>#{value}</span>"
       end
     end
 
-    out += "</li>\n" * indent_level + "</ul>\n"
+    false
   end
 
   def permission_humanize(permission)

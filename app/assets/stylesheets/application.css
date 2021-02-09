@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+
+.with_permission
+{
+  color: green;
+}
+
+.without_permission
+{
+  color: black;
+}

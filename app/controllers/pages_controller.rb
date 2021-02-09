@@ -2,35 +2,26 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @authorizations = YAML.load_file('config/authorizations.yml')
-    @authorizations.extend Hashie::Extensions::DeepFind
-
-    @my_authorizations = []
-    
     if signed_in?
-      current_user.roles.each do |role|
-        role.role_permissions.each do |rp|
-          @my_authorizations << rp.permission
-        end
-      end
+      @authorizations = authorizations
+      @my_authorizations = my_authorizations
     end
   end
 
+  def authorizations
+    authorizations = YAML.load_file('config/authorizations.yml')
+    authorizations.extend Hashie::Extensions::DeepFind
+  end
 
-  def HashToArray(hash, item = 'all')
-    return unless hash.is_a?(Hash)
+  def my_authorizations
+    my_authorizations = []
 
-    itens = []
-    hash.each do |key, value|
-      if value.is_a?(Hash)
-        itens.concat HashToArray(value, "#{item}.#{key}")
-      elsif value.is_a?(Array)
-        value.each { |v| itens << "#{item}.#{key}.#{v}" }
-      else
-        itens << "#{item}.#{key}.#{value}"
+    current_user.roles.each do |role|
+      role.role_permissions.each do |rp|
+        my_authorizations << rp.permission
       end
     end
 
-    itens
+    my_authorizations
   end
 end

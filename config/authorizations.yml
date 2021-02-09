@@ -5,8 +5,7 @@ all:
   coupon:
     all: [read, create, update, delete]
   invoice:
-    all: [read, create, update, delete]
-    owner: [read, create, update, delete]
+    all: [read, create, update, delete, disable]
   product: 
     all: [read, create, update, delete]
   user:
