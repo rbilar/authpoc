@@ -1,24 +1,53 @@
-# README
+# Solução
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esta POC tem a finalidade de testar a usabilidade do Cancancan dentro das 'minhas' necessidades.
 
-Things you may want to cover:
+## Linguagem e Tecnologias Utilizadas
 
-* Ruby version
+O projeto está implementado utilizando a linguagem Ruby, na versão 2.7.2 (https://www.ruby-lang.org/pt/downloads/).
 
-* System dependencies
+São utilizados também os frameworks e biliotecas abaixo:
+- Ruby on Rails: (http://rubyonrails.org/): Framework principal usado para ORM, business, e views.
+- Rake: (https://ruby.github.io/rake/): usado para ações de build do projeto.
+- Bundler: (http://bundler.io/): usado para gerenciamento de dependencias do projeto.
+- Puma: (https://github.com/puma/puma): usado para execução do web server.
 
-* Configuration
+Demais bibliotecas podem ser consultadas no arquivo Gemfile.
 
-* Database creation
+## Serviços e ferramentas utilizadas
 
-* Database initialization
+Para execução do sistema, há alguns serviços e ferramentas os quais o projeto é dependente, são eles:
+- Postgres (https://www.postgresql.org/): banco de dados usado pelo sistema, com modelo de dados sendo controlado/versionado através de migrations do Rails.
 
-* How to run the test suite
+# Para desenvolvedores
 
-* Services (job queues, cache servers, search engines, etc.)
+## Rodando localmente
 
-* Deployment instructions
+Setup de ambiente
 
-* ...
+- `rails bin/setup && rails db:reset`
+
+Subir o projeto
+
+- `rails bin/setup && rails db:reset`
+
+## Rodando no Docker
+
+Setup de ambiente
+
+- `docker-compose up --build`
+
+Subir o projeto
+
+- `docker-compose exec web rails bin/setup && rails db:reset`
+
+## Acessos
+
+| User            | Email               | Password |
+| ----------------|:-------------------:|---------:|
+| Admin           | admin@bilar.com     | teste123 |
+| Manager         | manager@bilar.com   | teste123 |
+| Seller          | seller@bilar.com    | teste123 |
+| Google Client   | google@bilar.com    | teste123 |
+| FaceBook Client | facebook@bilar.com  | teste123 |
+| Musk Client     | musk@bilar.com      | teste123 |

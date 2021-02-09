@@ -21,7 +21,7 @@ module ApplicationHelper
       end
     end
 
-    out += "</li></ul>"
+    out += '</li></ul>'
   end
 
   def permission_class(autorization, permissions)
@@ -31,14 +31,11 @@ module ApplicationHelper
   end
 
   def permission_path?(autorization, permissions)
-    puts "- - - - - - - - - - - - "
-
     permissions.each do |permission|
       auth = ''
       autorization.split('.').each_with_index do |a, i|
-        if (i.positive?)
-          auth += '.' + a
-          puts permission + " | " + auth
+        if i.positive?
+          auth += ".#{a}"
           return true if auth.start_with? permission
         else
           auth += a

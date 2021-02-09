@@ -1,39 +1,20 @@
 <% if signed_in? %>
   <h3>Wellcome <i><%= current_user.email %></i></h3>
-  <p><b>Your roles:</b></p>
+  <h3>Your roles</h3>
   <ul>
     <% current_user.roles.each do |role| %>
       <li><%= role.name %></li>
     <% end %>
   </ul>
-  <p>
-    AUTORIZAÇÕES: <%= @my_authorizations %>
-  </p>
 
-  <p><b>Your authorizations:</b></p>
+  <h3>Your authorizations</h3>
+  <p>
+    <b>Inline:</b> <%= @my_authorizations %>
+  </p>
+  <p>
+    <b>Formated:</b>
+  </p>
   <%= AutorizationsToHTML(@authorizations['all'], @my_authorizations).html_safe %>
-
-  <p>
-    <%= "#{ permission_humanize(can? :manage, Client) } - manage Client" %>
-  </p>
-  <p>
-    <%= "#{ permission_humanize(can? :manage, Invoice) } - manage Invoice" %>
-  </p>
-  <p>
-    <%= "#{ permission_humanize(can? :disable, Invoice ) } - disable Invoice" %>
-  </p>
-  <p>
-    <%= "#{ permission_humanize(can? :read, Coupon) } - read Coupon" %>
-  </p>
-  <p>
-    <%= "#{ permission_humanize(can? :manage, Coupon) } - manage Coupon" %>
-  </p>
-  <p>
-    <%= "#{ permission_humanize(can? :manage, User) } - manage User" %>
-  </p>
-  <p>
-    <%= "#{ permission_humanize(can? :manage, @current_user ) } - manage Current User" %>
-  </p>
 <% else %>
   Please, <%= link_to 'Login', new_user_session_path %>
 <% end %>

@@ -1,6 +1,8 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: %i[ show edit update destroy ]
 
+  load_and_authorize_resource
+
   # GET /invoices or /invoices.json
   def index
     @invoices = Invoice.all
@@ -8,15 +10,18 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1 or /invoices/1.json
   def show
+    authorize! :show, @invoice
   end
 
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    authorize! :create, @invoice
   end
 
   # GET /invoices/1/edit
   def edit
+    authorize! :edit, @post
   end
 
   # POST /invoices or /invoices.json
