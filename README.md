@@ -29,17 +29,18 @@ Setup de ambiente
 
 Subir o projeto
 
-- `rails bin/setup && rails db:reset`
+- `rails s`
 
 ## Rodando no Docker
 
 Setup de ambiente
 
-- `docker-compose up --build`
+- `docker-compose build`
+- `docker-compose run web rails bin/setup && rails db:reset`
 
 Subir o projeto
 
-- `docker-compose exec web rails bin/setup && rails db:reset`
+- `docker-compose up`
 
 ## Acessos
 
