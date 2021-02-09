@@ -7,8 +7,15 @@
     <% end %>
   </ul>
   <p><b>Your authorizations:</b></p>
-  <%= HashToHTML(@my_authorizations).html_safe %>
-  
+  <%= HashToHTML(@authorizations).html_safe %>
+
+  <p><b>[NOVA] Your authorizations:</b></p>
+  <%= AutorizationsToHTML(@authorizations['all'], @my_authorizations).html_safe %>
+
+  <p>
+    AURIZAÇÔES: <%= @my_authorizations %>
+  </p>
+
   <p>
     <%= "#{ permission_humanize(can? :manage, Client) } - manage Client" %>
   </p>
@@ -23,6 +30,9 @@
   </p>
   <p>
     <%= "#{ permission_humanize(can? :manage, User) } - manage User" %>
+  </p>
+  <p>
+    <%= "#{ permission_humanize(can? :manage, @current_user ) } - manage Current User" %>
   </p>
 <% else %>
   Please, <%= link_to 'Login', new_user_session_path %>

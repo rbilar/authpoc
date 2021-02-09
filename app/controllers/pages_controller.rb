@@ -5,22 +5,15 @@ class PagesController < ApplicationController
     @authorizations = YAML.load_file('config/authorizations.yml')
     @authorizations.extend Hashie::Extensions::DeepFind
 
-    # @my_authorizations = []
-
-    # if signed_in?
-    #   current_user.roles.each do |role|
-    #     role.role_permissions.each do |rp|
-    #       @my_authorizations << PermissionFinder(rp.permission) if PermissionFinder(rp.permission)
-    #     end
-    #   end
-    # end
-
-
-    permissions = HashToArray(@authorizations['all'])
-    p 'TODAS'
-    p permissions
-  
-    @my_authorizations = @authorizations
+    @my_authorizations = []
+    
+    if signed_in?
+      current_user.roles.each do |role|
+        role.role_permissions.each do |rp|
+          @my_authorizations << rp.permission
+        end
+      end
+    end
   end
 
 

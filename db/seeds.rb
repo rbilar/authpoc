@@ -18,7 +18,7 @@ roles = Role.create([{ name: 'Admin' }, { name: 'Manager' }, { name: 'Seller' },
 
 RolePermission.create([{ role: roles.first, permission: 'all.client.all' },
                        { role: roles.first, permission: 'all.coupon.all.read' },
-                       { role: roles.first, permission: 'all.user' }])
+                       { role: roles.first, permission: 'all.user.owner' }])
 
 User.create([{ email: 'admin@rdstation.com', password: 'teste123', password_confirmation: 'teste123', roles: [roles.first] },
              { email: 'manager@rdstation.com', password: 'teste123', password_confirmation: 'teste123', roles: [roles.second] },
